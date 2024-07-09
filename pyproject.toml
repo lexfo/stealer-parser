@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "stealer-parser"
+version = "1.0.0"
+description = "Infostealer logs parser."
+authors = ["matya <135035586+m4tya@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+coloredlogs = "^15.0.1"
+py7zr = "^0.21.0"
+rarfile = "^4.2"
+verboselogs = "^1.7"
+
+[tool.poetry.scripts]
+stealer_parser = "stealer_parser.main:main"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.1"
+pycodestyle = "^2.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

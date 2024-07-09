@@ -1,0 +1,98 @@
+/* Grammar for parsing logs system/user files. */
+
+/* -------------------------------------------------------
+   The grammar symbols
+   ------------------------------------------------------- */
+
+%token  WORD
+%token  NEWLINE
+%token  SPACE
+%token  DASH
+
+%token  UID_PREFIX
+/*      'UID:' | 'MachineID:' */
+
+%token  COMPUTER_NAME_PREFIX
+/*      'Computer:' | 'ComputerName:' | 'Computer Name:' | 'PC Name:' | 'Hostname:' | 'MachineName:' */
+
+%token  HWID_PREFIX
+/*      'HWID:' */
+
+%token  USERNAME_PREFIX
+/*      'User Name:' | 'UserName:' | 'User:' */
+
+%token  IP_PREFIX
+/*      'IP:' | 'Ip:' | 'IPAddress:' | 'IP Address:' | 'LANIP:' */
+
+%token  COUNTRY_PREFIX
+/*      'Country:' | 'Country Code:' */
+
+%token  LOG_DATE_PREFIX
+/*      'Log date:' | 'Last seen:' | 'Install Date:' */
+
+%token  OTHER_PREFIX
+/*      'User Agents:' | Installed Apps:' | 'Current User:' | 'Process List:' */
+
+/* -------------------------------------------------------
+   The Grammar
+   ------------------------------------------------------- *
+
+%start system
+%%
+
+system           : NEWLINE
+                 | information
+                 | header_line
+                 ;
+header_line      : WORD NEWLINE
+                 | SPACE NEWLINE
+                 | WORD header_line
+                 ;
+information      : uid_line
+                 | computer_line
+                 | hwid_line
+                 | username_line
+                 | ip_line
+                 | country_line
+                 | log_date_line
+                 ;
+uid_line         : UID_PREFIX NEWLINE
+                 | UID_PREFIX SPACE NEWLINE
+                 | UID_PREFIX SPACE entry NEWLINE
+                 | list_element uid_line
+                 ;
+computer_line    : COMPUTER_PREFIX NEWLINE
+                 | COMPUTER_PREFIX SPACE NEWLINE
+                 | COMPUTER_PREFIX SPACE entry NEWLINE
+                 | list_element computer_line
+                 ;
+hwid_line        : HWID_PREFIX NEWLINE
+                 | HWID_PREFIX SPACE NEWLINE
+                 | HWID_PREFIX SPACE entry NEWLINE
+                 | list_element hwid_line
+                 ;
+username_line    : USERNAME_PREFIX NEWLINE
+                 | USERNAME_PREFIX SPACE NEWLINE
+                 | USERNAME_PREFIX SPACE entry NEWLINE
+                 | list_element username_line
+                 ;
+ip_line          : IP_PREFIX NEWLINE
+                 | IP_PREFIX SPACE NEWLINE
+                 | IP_PREFIX SPACE entry NEWLINE
+                 | list_element ip_line
+                 ;
+country_line     : COUNTRY_PREFIX NEWLINE
+                 | COUNTRY_PREFIX SPACE NEWLINE
+                 | COUNTRY_PREFIX SPACE entry NEWLINE
+                 | list_element country_line
+                 ;
+log_date_line    : LOG_DATE_PREFIX NEWLINE
+                 | LOG_DATE_PREFIX SPACE NEWLINE
+                 | LOG_DATE_PREFIX SPACE entry NEWLINE
+                 | list_element log_date_line
+                 ;
+list_element     : SPACE DASH SPACE
+                 ;
+entry            : WORD
+                 | entry SPACE WORD
+                 ;

@@ -1,0 +1,126 @@
+default_language_version:
+  python: python3.10
+
+repos:
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+    - id: isort
+      args: [
+        '--profile', 'black',
+        '--ensure-newline-before-comments',
+        '--force-grid-wrap', '0',
+        '--trailing-comma',
+        '--line-length', '79',
+        '--multi-line', '3',
+        '--use-parentheses'
+      ]
+      exclude: ply/
+      types: [
+        'python'
+      ]
+
+  - repo: https://github.com/myint/autoflake
+    rev: v2.2.1
+    hooks:
+    - id: autoflake
+      args: [
+        '--ignore-init-module-imports',
+        '--in-place',
+        '--remove-unused-variables',
+        '--remove-all-unused-imports',
+      ]
+      exclude: ply/
+
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+    - id: black
+      args: [
+        '--line-length', '79'
+      ]
+      exclude: ply/
+      types: [
+        'python'
+      ]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+    - id: mypy
+      args: [
+        '--allow-untyped-decorators',
+        '--allow-subclassing-any',
+        '--explicit-package-bases',
+        '--follow-imports','skip',
+        '--implicit-reexport',
+        '--ignore-missing-imports',
+        '--namespace-packages',
+        '--show-error-codes',
+        '--strict'
+      ]
+      additional_dependencies: [
+        'types-pytz'
+      ]
+      exclude: ply/
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+    - id: pydocstyle
+      additional_dependencies: [
+        'tomli'
+      ]
+      args: [
+        '--ignore', 'D213,D203,D204,D416,D417'
+      ]
+      exclude: ply/|stealer_parser/parsing/lexer*
+
+  - repo: local
+    hooks:
+    - id: pycodestyle
+      name: pycodestyle
+      entry: pycodestyle
+      language: system
+      args: [
+        '--exclude', '__init__.py',
+        '--ignore', 'E722,E126,W503,W605',
+        '--max-line-length', '80'
+      ]
+      exclude: ply/
+      types: [
+        'python'
+      ]
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+    - id: bandit
+      args: [
+        '--skip', 'B324,B501,B603'
+      ]
+      exclude: ply/
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.17
+    hooks:
+    - id: mdformat
+      args: [
+        '--number'
+      ]
+      exclude: '.gitlab/|.github/|ply/'
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    - id: trailing-whitespace
+      exclude: '.gitlab/|.github/|ply/'
+    - id: end-of-file-fixer
+      exclude: '.gitlab/|.github/|ply/'
+    - id: check-yaml
+      args: [
+        '--allow-multiple-documents'
+      ]
+    - id: check-added-large-files
+      exclude: ply/
+    - id: detect-private-key

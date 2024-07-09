@@ -1,0 +1,3 @@
+[submodule "stealer_parser/ply"]
+	path = stealer_parser/ply
+	url = https://github.com/dabeaz/ply
