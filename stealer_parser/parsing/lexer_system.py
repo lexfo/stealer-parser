@@ -94,7 +94,7 @@ def t_UID_PREFIX(token: LexToken) -> LexToken:
 # 'Computer' | 'ComputerName:' | 'Computer Name:' | 'PC Name:' | 'Hostname:'
 # | 'MachineName:'
 def t_COMPUTER_NAME_PREFIX(token: LexToken) -> LexToken:
-    r"\b((computer(\ ?name)?)|pc\ name|hostname|machinename)\b:"
+    r"\b((computer(\ ?name)?)|pc\ name|hostname|machinename|pc|computernamednshostname)\b:"
     return token
 
 
@@ -106,25 +106,25 @@ def t_HWID_PREFIX(token: LexToken) -> LexToken:
 
 # 'User Name:' | 'UserName:' | 'User:'
 def t_USERNAME_PREFIX(token: LexToken) -> LexToken:
-    r"\b(user(\ ?name)?)\b:"
+    r"\b((user(\ ?name)?)|username)\b:"
     return token
 
 
 # 'IP:' | 'Ip:' | 'IPAddress:' | 'IP Address:' | 'LANIP:'
 def t_IP_PREFIX(token: LexToken) -> LexToken:
-    r"\b((ip(\ ?address)?)|lanip)\b:"
+    r"\b((ip(\ ?address)?)|lanip|)\b:"
     return token
 
 
 # 'Country:' | 'Country Code:'
 def t_COUNTRY_PREFIX(token: LexToken) -> LexToken:
-    r"\b(country(\ code)?)\b:"
+    r"\b((country(\ code)?)|location)\b:"
     return token
 
 
 # 'Log date:' | 'Last seen:' | 'Install Date:'
 def t_LOG_DATE_PREFIX(token: LexToken) -> LexToken:
-    r"\b(log\ date|last\ seen|install\ date)\b:"
+    r"\b(log\ date|last\ seen|install\ date|(local(\ ?time)?))\b:"
     return token
 
 

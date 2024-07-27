@@ -27,5 +27,5 @@ JSONType: TypeAlias = JSONObjectType | JSONArrayType
 
 # NOTE: To be extended if more infostealers are handled.
 StealerNameType: TypeAlias = Literal[
-    "redline", "stealc", "lummac2", "meta", "raccoon", "dcrat"
+    "redline", "stealc", "lummac2", "meta", "raccoon", "dcrat", "aurora", "rise", "arkey"
 ]

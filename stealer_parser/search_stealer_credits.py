@@ -8,6 +8,19 @@ import re
 from stealer_parser.models import StealerNameType
 
 # ASCII art stealers signatures
+
+ARKEY_HEADER: str = (
+    "|========== Arkei Stealer ========|"
+)
+
+RISE_HEADER: str = (
+    "RiseProSUPPORT"
+)
+
+AURORA_HEADER: str = (
+    "███████║██║░░░██║██████╔╝██║░░██║██████╔╝███████║"
+)
+
 DCRAT_HEADER: str = (
     "  ___           _      ___             _        _   ___    _ _____ \n"
     " |   \\ __ _ _ _| |__  / __|_ _ _  _ __| |_ __ _| | | _ \\  /_\\_   _|\n"
@@ -115,5 +128,14 @@ def search_stealer_name(text: str) -> StealerNameType | None:
 
     if DCRAT_HEADER in clean_text:
         return "dcrat"
+
+    if ARKEY_HEADER in clean_text:
+        return "arkey"
+
+    if RISE_HEADER in clean_text:
+        return 'rise'
+
+    if AURORA_HEADER in clean_text:
+        return 'aurora'
 
     return None
