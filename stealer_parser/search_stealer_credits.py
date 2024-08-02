@@ -9,7 +9,7 @@ from stealer_parser.models import StealerNameType
 
 # ASCII art stealers signatures
 
-ARKEY_HEADER: str = (
+ARKEI_HEADER: str = (
     "|========== Arkei Stealer ========|"
 )
 
