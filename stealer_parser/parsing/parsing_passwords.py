@@ -93,7 +93,7 @@ from .parser import (
 # Type alias for parsing function.
 ParsingFunc: TypeAlias = Callable[[LogsParser, Credential], bool]
 
-PASSWORDS_BROWSER_REGEX: str = r"(?i)\bPasswords\[([A-Za-z0-9_ ]+)\]\S+\.txt\b"
+PASSWORDS_BROWSER_REGEX: str = r"(?i)\bPasswords\[([A-Za-z0-9_ ]+)\]\S+\.txt\b|(?i)\b(unique|recovered|browser|firefox|chrome|opera|edge|brave|all)(\s|-|_)passwords\.txt\b|(?i)\baccounts\.txt\b|(?i)passwords\.txt\b"
 # Let's break down this regex:
 #
 # (?i)       Case insensitive.
