@@ -129,7 +129,7 @@ def search_stealer_name(text: str) -> StealerNameType | None:
     if DCRAT_HEADER in clean_text:
         return "dcrat"
 
-    if ARKEY_HEADER in clean_text:
+    if ARKEI_HEADER in clean_text:
         return "arkei"
 
     if RISE_HEADER in clean_text:
