@@ -17,6 +17,13 @@ DCRAT_HEADER: str = (
     "                               |__/                                \n"
 )
 
+MASSLOGGER_HEADER: str = (
+    "*      Best               | |  / _ \\ / __|/ __| __| _ \\   *\n"
+    "*                         | |_| (_) | (_ | (_ | _||   /   *\n"
+    "*      Private  - - - ->  |____\\___/ \\___|\\___|___|_|_\\   *\n"
+    "============X============\n"
+)
+
 META_HEADER: str = (
     "*              / \\ / \\ / \\ / \\                *\n"
     "*             ( M | E | T | A )               *\n"
@@ -106,6 +113,9 @@ def search_stealer_name(text: str) -> StealerNameType | None:
 
     if STEALC_HEADER in clean_text:
         return "stealc"
+
+    if MASSLOGGER_HEADER in clean_text:
+        return "masslogger"
 
     if META_HEADER in clean_text:
         return "meta"
